@@ -14,7 +14,12 @@ class SearchImagePresenter {
     private let interactor: SearchImagePresenterToInteractorProtocol
     private let router: SearchImagePresenterToRouterProtocol
     
-    //private var SearchImage: SearchImage?
+    var recentSearches: [String] {
+        if UserDefaultsValues.shared.recentSearches == nil {
+            UserDefaultsValues.shared.recentSearches = [String]()
+        }
+        return UserDefaultsValues.shared.recentSearches ?? [String]()
+    }
     //private var SearchImageSearchResult: [SearchImage]?
     //private var isSearching = false
     
@@ -28,10 +33,11 @@ class SearchImagePresenter {
 extension SearchImagePresenter: SearchImageViewToPresenterProtocol {
     func viewDidLoad() {
         print("SearchImagePresenter presenter viewDidLoad")
+        
     //    //view?.showLoadingIndicator()
     //    //interactor.getCurrencies()
-    }
-        
+    }    
+    
     //func configure(cell: SearchImageCellView, indexPath: IndexPath) {
     //    guard let currency = isSearching ? SearchImageSearchResult?[indexPath.row] :  currencies?.rates[indexPath.row] else { print("return \(#function)"); return }
     //    let viewModel = SearchImageCellViewModel(currency: currency)

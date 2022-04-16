@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rdi-zr-Oed">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rdi-zr-Oed">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--News List View Controller-->
+        <!--Search Image View Controller-->
         <scene sceneID="Zgj-uJ-uvr">
             <objects>
-                <viewController id="Rdi-zr-Oed" customClass="SearchImageViewController" customModule="TestMyTemplates" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Rdi-zr-Oed" customClass="SearchImageViewController" customModule="FlickerSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Xs-0j-NS7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="y2S-4w-igG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="T2b-xb-BuX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="y2S-4w-igG" firstAttribute="leading" secondItem="7Xs-0j-NS7" secondAttribute="leading" id="EHI-gl-fhu"/>
+                            <constraint firstItem="y2S-4w-igG" firstAttribute="top" secondItem="T2b-xb-BuX" secondAttribute="top" id="FPV-X5-7Oe"/>
+                            <constraint firstItem="y2S-4w-igG" firstAttribute="trailing" secondItem="T2b-xb-BuX" secondAttribute="trailing" id="Vca-ot-RIB"/>
+                            <constraint firstItem="y2S-4w-igG" firstAttribute="bottom" secondItem="T2b-xb-BuX" secondAttribute="bottom" id="xcO-t9-5vo"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="y2S-4w-igG" id="cb9-PG-mth"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQq-e1-4wf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1911" y="1022"/>
+            <point key="canvasLocation" x="-1911.2" y="1021.4392803598201"/>
         </scene>
     </scenes>
     <resources>

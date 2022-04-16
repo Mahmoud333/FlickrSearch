@@ -20,6 +20,8 @@ protocol SearchImagePresenterToViewProtocol: class {
 protocol SearchImageViewToPresenterProtocol: class {
     var view: SearchImagePresenterToViewProtocol? { get set }
     //var numberOfRows: Int { get }
+    var recentSearches: [String] { get }
+
     
     func viewDidLoad()
     //func configure(cell: SearchImageCellView, indexPath: IndexPath)
