@@ -13,7 +13,6 @@ class SearchImageResultViewController: UIViewController {
     var presenter: SearchImageResultViewToPresenterProtocol!
     
     @IBOutlet weak var collectionView: UICollectionView!
-    //@IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,33 +22,27 @@ class SearchImageResultViewController: UIViewController {
     
     func setupUI() {
         title = "Search"
-        let layout = CampaignLayout()
-        layout.delegate = self
-        collectionView.collectionViewLayout = layout
+        //let layout = CampaignLayout()
+        //layout.delegate = self
+        //collectionView.collectionViewLayout = layout
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "ImageCVCell", bundle: .main), forCellWithReuseIdentifier: "ImageCVCell")
     }
 }
 
-extension SearchImageResultViewController: CampaignLayoutDelegate {
-    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, cellWidth: CGFloat) -> CGFloat {
-        return CGFloat(Int.random(in: 100...150))
+//extension SearchImageResultViewController: CampaignLayoutDelegate {
+//    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, cellWidth: CGFloat) -> CGFloat {
+//        return CGFloat(Int.random(in: 100...150))
+//    }
+//}
+
+extension SearchImageResultViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let padding: CGFloat = 10.0 + 10.0 + 10.0 //left + middle + right
+        return CGSize(width: (collectionView.frame.width - padding) / 2, height: 120)
     }
 }
-
-//extension SearchImageResultViewController: UISearchResultsUpdating {
-//    func updateSearchResults(for searchController: UISearchController) {
-//        guard let text = searchController.searchBar.text else { return }
-//    }
-//}
-
-//extension SearchImageResultViewController: UISearchBarDelegate {
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        guard let text = searchBar.text else { return }
-//        presenter.searchBy(text: text)
-//    }
-//}
 
 extension SearchImageResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,20 +58,36 @@ extension SearchImageResultViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         presenter.numberOfRows
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.item >= presenter.numberOfRows - 4 {
+            presenter.getNextPage()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ActivityFooter", for: indexPath) as! ActivityFooter
+            if presenter.isLoading {
+                footer.activityIndicator.startAnimating()
+            } else {
+                footer.activityIndicator.isHidden = true
+                footer.activityIndicator.hidesWhenStopped = true
+                footer.activityIndicator.stopAnimating()
+            }
+            return footer
+        default: return UICollectionReusableView()
+        }
+    }
 }
 
 
 extension SearchImageResultViewController: SearchImageResultPresenterToViewProtocol {
-    
     func reloadData() {
-        self.collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }
     }
-    
-    //func showLoadingIndicator() {
-    //    print("Should show loading indicator")
-    //}
-    
-    //func hideLoadingIndicator() {
-    //    print("Should hide loading indicator")
-    //}
 }

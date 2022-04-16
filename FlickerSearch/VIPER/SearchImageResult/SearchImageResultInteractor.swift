@@ -12,35 +12,21 @@ class SearchImageResultInteractor: SearchImageResultPresenterToInteractorProtoco
     
     weak var presenter: SearchImageResultInteractorToPresenterProtocol?
     
-    let plugin: PluginType = NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))
-    lazy var imagesProvider = MoyaProvider<MoyaImages>(plugins: [plugin])
-    
-    func searchImages(text: String, page: String, limit: String) { //, onSuccess: @escaping (RestaurantList) -> (), onError: @escaping (NSError) -> ()
-        /*imagesProvider.MARequest(target: .searchImages(text: text, page: page, limit: limit), onSuccess: { (resturants: RestaurantList, data, code, _) in
-            onSuccess(resturants)
-        }) { (error, code) in
-            onError(error)
-        }*/
+    var imagesProvider: MoyaProvider<MultiTarget>
         
-        imagesProvider.request(.searchImages(text: text, page: page, limit: limit)) { [weak self] result in
+    init(provider: MoyaProvider<MultiTarget> = MoyaProvider<MultiTarget>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))])) {
+        imagesProvider = provider
+    }
+    
+    func searchImages(text: String, page: String, limit: String) {
+        let target = MultiTarget(MoyaImages.searchImages(text: text, page: page, limit: limit))
+        imagesProvider.MHRequest(target: target, type: SearchImagesResponse.self) { [weak self] result in
             guard let strongSelf = self else { return }
             switch result {
-            case let .success(moyaResponse):
-                let statusCode = moyaResponse.statusCode
-                let data = moyaResponse.data
-                do {
-                    let object = try JSONDecoder().decode(SearchImagesResponse.self, from: data)
-                    guard let photos = object.photos else { return }
-                    strongSelf.presenter?.searchImagesSuccessfully(SearchImageResult: photos)
-                } catch {
-                    print("\nError in File: \(#file.split(separator: "/").last!), Func: \(#function), Line: \(#line) \n|>Error: \(error)")
-                    strongSelf.presenter?.searchImagesFailed(withError: error)
-                }
+            case let .success((model, _)):
+                guard let photos = model.photos else { return }
+                strongSelf.presenter?.searchImagesSuccessfully(SearchImageResult: photos)
             case let .failure(error):
-                // this means there was a network failure - either the request
-                // wasn't sent (connectivity), or no response was received (server
-                // timed out).  If the server responds with a 4xx or 5xx error, that
-                // will be sent as a ".success"-ful response.
                 strongSelf.presenter?.searchImagesFailed(withError: error)
             }
         }

@@ -14,18 +14,12 @@ class SearchImageResultRouter: SearchImageResultPresenterToRouterProtocol {
     
     static func createInitForApp() -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: SearchImageResultRouter.createModule())
-        //BG
-        //navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //navigationController.navigationBar.shadowImage = UIImage()
-        //navigationController.navigationBar.isTranslucent = true
-        //Title Color
-        //navigationController.navigationBar.tintColor = .white
-        //navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         return navigationController
     }
     
     static func createModule() -> SearchImageResultViewController {
         let view = UIStoryboard(name: "SearchImageResultViewController", bundle: Bundle.main).instantiateInitialViewController() as! SearchImageResultViewController
+
         let interactor = SearchImageResultInteractor()
         let router = SearchImageResultRouter()
         let presenter = SearchImageResultPresenter(view: view, interactor: interactor, router: router)
@@ -34,9 +28,4 @@ class SearchImageResultRouter: SearchImageResultPresenterToRouterProtocol {
         router.viewController = view
         return view
     }
-    
-    //func pushSearchImageResultDetailsViewController(SearchImageResult: SearchImageResult) { //-> UIViewController
-    //    let SearchImageResultDetailModule = SearchImageResultDetailsRouter.createModule(SearchImageResult: SearchImageResult)
-    //    self.viewController?.navigationController?.pushViewController(currencyDetailModule, animated: true)
-    //}
 }

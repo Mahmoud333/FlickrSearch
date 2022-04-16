@@ -22,9 +22,11 @@ protocol SearchImageResultViewToPresenterProtocol: AnyObject {
     var numberOfRows: Int { get }
     var numberOfSections: Int { get }
     var searchText: String! { get set }
+    var isLoading: Bool { get }
     
     func viewDidLoad()
     func searchBy(text: String)
+    func getNextPage()
     func configure(cell: ImageCVCell, indexPath: IndexPath)
     //func didSelect(indexPath: IndexPath)
 }

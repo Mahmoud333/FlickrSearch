@@ -15,8 +15,9 @@ class SearchImageResultPresenter {
     private let router: SearchImageResultPresenterToRouterProtocol
     
     var searchText: String!
-    private var lastPage = 0
-    private let limit = 20
+    private(set) var isLoading = false
+    private var lastPage = -1
+    private let limit = 40
     private var searchImageResult = [Photo]()
     var numberOfRows: Int {
         searchImageResult.count
@@ -24,8 +25,6 @@ class SearchImageResultPresenter {
     var numberOfSections: Int {
         1
     }
-    //private var SearchImageResultSearchResult: [SearchImageResult]?
-    //private var isSearching = false
     
     init(view: SearchImageResultPresenterToViewProtocol, interactor: SearchImageResultPresenterToInteractorProtocol, router: SearchImageResultPresenterToRouterProtocol) {
         self.view = view
@@ -37,33 +36,57 @@ class SearchImageResultPresenter {
 extension SearchImageResultPresenter: SearchImageResultViewToPresenterProtocol {
     func viewDidLoad() {
         print("SearchImageResultPresenter presenter viewDidLoad")
-    //    //view?.showLoadingIndicator()
-    //    //interactor.getCurrencies()
     }
         
     func configure(cell: ImageCVCell, indexPath: IndexPath) {
-        //guard let currency = isSearching ? SearchImageResultSearchResult?[indexPath.row] :  currencies?.rates[indexPath.row] else { print("return \(#function)"); return }
         let viewModel = ImageCVCellVM(photo: self.searchImageResult[indexPath.row])
         cell.configure(vm: viewModel)
     }
     
-    func searchBy(text: String) {
-        //TO DO SAVE INTO USER DEFAULTS
+    
+    /// Don't allow duplicates and Maximum Size is 10
+    func saveSearchText(text: String) {
+        //Don't allow duplicates
+        if let index = UserDefaultsValues.shared.recentSearches?.firstIndex(of: text) {
+            UserDefaultsValues.shared.recentSearches?.remove(at: index)
+        }
+        //Insert it
         UserDefaultsValues.shared.recentSearches?.insert(text, at: 0)
-        
-        //TO DO CALL OUR SERVICE
-        interactor.searchImages(text: text, page: "\(lastPage + 1)", limit: "\(limit)")
-        
+        //Maximum Size is 10
+        if UserDefaultsValues.shared.recentSearches!.count > 10 {
+            UserDefaultsValues.shared.recentSearches?.removeLast()
+        }
     }
+    
+    func searchBy(text: String) {
+        guard text != searchText else { return }
+        guard isLoading == false else { return }
+        isLoading = true
+        searchText = text
+
+        searchImageResult.removeAll()
+        view?.reloadData()
+        
+        saveSearchText(text: text)
+        interactor.searchImages(text: text, page: "\(1)", limit: "\(limit)")
+    }
+    
+    func getNextPage() {
+        guard isLoading == false else { return }
+        isLoading = true
+        interactor.searchImages(text: searchText, page: "\(lastPage + 1)", limit: "\(limit)")
+    }
+    
 }
 
 extension SearchImageResultPresenter: SearchImageResultInteractorToPresenterProtocol  {
     func searchImagesSuccessfully(SearchImageResult: Photos) {
+        guard isLoading == true else { return }
+        isLoading = false
         lastPage = SearchImageResult.page ?? 0
-        guard let photos =  SearchImageResult.photo else { return }
+        guard let photos = SearchImageResult.photo else { return }
         searchImageResult.append(contentsOf: photos)
         //view?.hideLoadingIndicator()
-        //self.SearchImageResult = SearchImageResult
         view?.reloadData()
     }
     
