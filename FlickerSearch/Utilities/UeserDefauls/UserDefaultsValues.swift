@@ -17,6 +17,9 @@ class UserDefaultsValues {
     //Public
     var recentSearches: [String]? {
         get {
+            if UserDefaults.standard.array(forKey: recentSearchesKey) as? [String] == nil {
+                UserDefaults.standard.set([String](), forKey: recentSearchesKey)
+            }
             return UserDefaults.standard.array(forKey: recentSearchesKey) as? [String]
         }
         set {
