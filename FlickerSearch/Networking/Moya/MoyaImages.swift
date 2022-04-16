@@ -47,7 +47,7 @@ extension MoyaImages: TargetType {
     }
     
     var sampleData: Data {
-        return "".data(using: .utf8)!
+        return "{\"photos\":{\"page\":1,\"pages\":121227,\"perpage\":1,\"total\":121227,\"photo\":[{\"id\":\"52008631881\",\"owner\":\"187610329@N06\",\"secret\":\"6e24f2962f\",\"server\":\"65535\",\"farm\":66,\"title\":\"Shropshire Cat Rescue 2013 Misty\",\"ispublic\":1,\"isfriend\":0,\"isfamily\":0}]},\"stat\":\"ok\"}".data(using: .utf8)!
     }
     
     var task: Task {
