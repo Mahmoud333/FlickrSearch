@@ -31,7 +31,9 @@ class CampaignLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
-        guard cache.isEmpty == true,let collectionView = collectionView else {
+        guard let collectionView = collectionView,
+            cache.isEmpty == true
+            || cache.count < collectionView.numberOfItems(inSection: 0) else { //to support reloadData pagination
             return
         }
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
@@ -42,7 +44,8 @@ class CampaignLayout: UICollectionViewLayout {
         var column = 0
         var yOffset: [CGFloat] = .init(repeating: 0, count: numberOfColumns)
         
-        for item in 0..<collectionView.numberOfItems(inSection: 0) {
+        for item in 0..<collectionView.numberOfItems(inSection: 0) { //doesn't support reloadData pagination
+        //for item in cache.count..<collectionView.numberOfItems(inSection: 0) { //to support reloadData pagination
             let indexPath = IndexPath(item: item, section: 0)
             let photoHeight = delegate?.collectionView( collectionView,
                                                         heightForPhotoAtIndexPath: indexPath , cellWidth: columnWidth) ?? 180
