@@ -8,12 +8,10 @@
 
 import Foundation
 
-//Presenter <-> View
+//MARK: Presenter <-> View
 protocol SearchImageResultPresenterToViewProtocol: AnyObject {
     var presenter: SearchImageResultViewToPresenterProtocol! { get set }
     
-    //func showLoadingIndicator()
-    //func hideLoadingIndicator()
     func reloadData()
 }
 
@@ -28,15 +26,14 @@ protocol SearchImageResultViewToPresenterProtocol: AnyObject {
     func searchBy(text: String)
     func getNextPage()
     func configure(cell: ImageCVCell, indexPath: IndexPath)
-    //func didSelect(indexPath: IndexPath)
 }
 
-//Presenter -> Router
+//MARK: Presenter -> Router
 protocol SearchImageResultPresenterToRouterProtocol {
-    //func pushSearchImageResultDetailsViewController(SearchImageResult: SearchImageResult)
+    func alert(title: String?, msg: String?)
 }
 
-//Presenter <-> Interactor
+//MARK: Presenter <-> Interactor
 protocol SearchImageResultPresenterToInteractorProtocol {
     var presenter: SearchImageResultInteractorToPresenterProtocol? { get set }
     

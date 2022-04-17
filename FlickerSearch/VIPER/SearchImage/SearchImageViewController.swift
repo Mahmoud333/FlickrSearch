@@ -43,7 +43,6 @@ class SearchImageViewController: UIViewController {
     }
     
     func setupSearchController() {
-        resultVC = SearchImageResultRouter.createModule()
         searchController = UISearchController(searchResultsController: resultVC)
         //searchController.searchResultsUpdater = resultVC
         //searchController.searchBar.delegate = resultVC
@@ -73,25 +72,19 @@ extension SearchImageViewController: UITableViewDelegate, UITableViewDataSource 
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         }
-        cell?.textLabel?.text = presenter.recentSearches[indexPath.row]
+        presenter.configure(cell: cell!)
         return cell!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.recentSearches.count
+        presenter.numberOfSections
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        presenter.numberOfRows
     }
 }
 
 extension SearchImageViewController: SearchImagePresenterToViewProtocol {
-    //func showLoadingIndicator() {
-    //    print("Should show loading indicator")
-    //}
-    
-    //func hideLoadingIndicator() {
-    //    print("Should hide loading indicator")
-    //}
+
 }

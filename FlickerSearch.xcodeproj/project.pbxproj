@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1E6596942809AE38002FDF10 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 1E6596932809AE38002FDF10 /* Moya */; };
 		1E65969B2809AFAA002FDF10 /* MoyaImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E65969A2809AFAA002FDF10 /* MoyaImages.swift */; };
-		1E65969D2809B0AA002FDF10 /* NetworkingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E65969C2809B0AA002FDF10 /* NetworkingConstants.swift */; };
 		1E6596A02809B74E002FDF10 /* SearchImagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E65969F2809B74E002FDF10 /* SearchImagesResponse.swift */; };
 		1E6596A32809C31F002FDF10 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1E6596A22809C31F002FDF10 /* Kingfisher */; };
 		1E6596A72809D104002FDF10 /* CampaignLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6596A62809D104002FDF10 /* CampaignLayout.swift */; };
@@ -43,6 +42,7 @@
 		1ED164FA280C27BA008D5993 /* SearchImageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED164F9280C27BA008D5993 /* SearchImageUITests.swift */; };
 		1ED164FE280C2878008D5993 /* XCUIElement+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED164FC280C2877008D5993 /* XCUIElement+Size.swift */; };
 		1ED164FF280C2878008D5993 /* XCUIElement+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED164FD280C2877008D5993 /* XCUIElement+Text.swift */; };
+		1ED16502280CC0BE008D5993 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED16501280CC0BE008D5993 /* UIViewController+Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +64,6 @@
 
 /* Begin PBXFileReference section */
 		1E65969A2809AFAA002FDF10 /* MoyaImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaImages.swift; sourceTree = "<group>"; };
-		1E65969C2809B0AA002FDF10 /* NetworkingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingConstants.swift; sourceTree = "<group>"; };
 		1E65969F2809B74E002FDF10 /* SearchImagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImagesResponse.swift; sourceTree = "<group>"; };
 		1E6596A62809D104002FDF10 /* CampaignLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignLayout.swift; sourceTree = "<group>"; };
 		1EBDFE8D2809A5080036C760 /* ImageCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCVCell.swift; sourceTree = "<group>"; };
@@ -101,6 +100,7 @@
 		1ED164F9280C27BA008D5993 /* SearchImageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImageUITests.swift; sourceTree = "<group>"; };
 		1ED164FC280C2877008D5993 /* XCUIElement+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Size.swift"; sourceTree = "<group>"; };
 		1ED164FD280C2877008D5993 /* XCUIElement+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Text.swift"; sourceTree = "<group>"; };
+		1ED16501280CC0BE008D5993 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +135,6 @@
 			children = (
 				1E65969E2809B734002FDF10 /* Model */,
 				1E6596972809AF5D002FDF10 /* Moya */,
-				1E65969C2809B0AA002FDF10 /* NetworkingConstants.swift */,
 				1ED09703280B1DC100630786 /* MoyaProvider+Decode.swift */,
 			);
 			path = Networking;
@@ -294,6 +293,7 @@
 		1ECC476B2809024400CDF851 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1ED16500280CC0AF008D5993 /* Alerts */,
 				1E6596A52809D0D5002FDF10 /* CollectionViewLayout */,
 				1E6596A42809D0C7002FDF10 /* UeserDefauls */,
 			);
@@ -340,6 +340,14 @@
 				1ED164FD280C2877008D5993 /* XCUIElement+Text.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		1ED16500280CC0AF008D5993 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				1ED16501280CC0BE008D5993 /* UIViewController+Alert.swift */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -489,7 +497,7 @@
 				1ECC475B2808F72500CDF851 /* SearchImageViewController.swift in Sources */,
 				1ECC47592808F72500CDF851 /* SearchImageRouter.swift in Sources */,
 				1EBDFE8F2809A5080036C760 /* ImageCVCell.swift in Sources */,
-				1E65969D2809B0AA002FDF10 /* NetworkingConstants.swift in Sources */,
+				1ED16502280CC0BE008D5993 /* UIViewController+Alert.swift in Sources */,
 				1ECC4768280901F200CDF851 /* SearchImageResultViewController.swift in Sources */,
 				1ECC4769280901F200CDF851 /* SearchImageResultInteractor.swift in Sources */,
 				1E65969B2809AFAA002FDF10 /* MoyaImages.swift in Sources */,

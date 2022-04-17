@@ -7,6 +7,7 @@
 
 
 import Foundation
+import UIKit
 
 class SearchImagePresenter {
     
@@ -20,8 +21,13 @@ class SearchImagePresenter {
         }
         return UserDefaultsValues.shared.recentSearches ?? [String]()
     }
-    //private var SearchImageSearchResult: [SearchImage]?
-    //private var isSearching = false
+    
+    var numberOfRows: Int {
+        recentSearches.count
+    }
+    var numberOfSections: Int {
+        1
+    }
     
     init(view: SearchImagePresenterToViewProtocol, interactor: SearchImagePresenterToInteractorProtocol, router: SearchImagePresenterToRouterProtocol) {
         self.view = view
@@ -33,32 +39,13 @@ class SearchImagePresenter {
 extension SearchImagePresenter: SearchImageViewToPresenterProtocol {
     func viewDidLoad() {
         print("SearchImagePresenter presenter viewDidLoad")
-        
-    //    //view?.showLoadingIndicator()
-    //    //interactor.getCurrencies()
-    }    
+    }
     
-    //func configure(cell: SearchImageCellView, indexPath: IndexPath) {
-    //    guard let currency = isSearching ? SearchImageSearchResult?[indexPath.row] :  currencies?.rates[indexPath.row] else { print("return \(#function)"); return }
-    //    let viewModel = SearchImageCellViewModel(currency: currency)
-    //    cell.configure(viewModel: viewModel)
-    //}
-    
-    //func didSelect(indexPath: IndexPath) {
-    //    //guard let currency = isSearching ? currenciesSearchResult?[indexPath.row] :  currencies?.rates[indexPath.row] else { print("return \(#function)"); return }
-    //    //router.pushCurrencyDetailsViewController(currency: currency)
-    //}
+    func configure(cell: UITableViewCell) {
+        cell?.textLabel?.text = presenter.recentSearches[indexPath.row]
+    }
 }
 
 extension SearchImagePresenter: SearchImageInteractorToPresenterProtocol  {
-    //func SearchImageFetchedSuccessfully(SearchImage: SearchImage) {
-    //    view?.hideLoadingIndicator()
-    //    self.SearchImage = SearchImage
-    //    view?.reloadData()
-    //}
-    
-    //func SearchImageFetchingFailed(withError error: Error) {
-    //    view?.hideLoadingIndicator()
-    //    //Failure - Should show alert
-    //}
+
 }

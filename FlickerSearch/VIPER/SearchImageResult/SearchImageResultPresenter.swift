@@ -86,12 +86,10 @@ extension SearchImageResultPresenter: SearchImageResultInteractorToPresenterProt
         lastPage = SearchImageResult.page ?? 0
         guard let photos = SearchImageResult.photo else { return }
         searchImageResult.append(contentsOf: photos)
-        //view?.hideLoadingIndicator()
         view?.reloadData()
     }
     
     func searchImagesFailed(withError error: Error) {
-        //view?.hideLoadingIndicator()
-        //Failure - Should show alert
+        router.alert(title: "Error", msg: error.localizedDescription)
     }
 }

@@ -17,17 +17,7 @@ extension MoyaImages: TargetType {
     
     var baseURL: URL {
         switch self {
-        case .searchImages(let text, let page, let limit):
-            /*let searchedString = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)?.lowercased() ?? String()
-            var urlStr = "\(BASE_URL)?page=\(page)&limit=\(limit)&q=\(searchedString)"
-            //if let current = UserAccountServices.instance.currentUser , current.roles.contains("operation") {
-            //  urlStr.append("&is_active=false")
-            //}else{
-                urlStr.append("&is_active=true")
-            //}
-            //============================
-            print(urlStr)
-            return URL(string: urlStr)!*/
+        case .searchImages:
             return URL(string: "https://api.flickr.com")!
         }
     }

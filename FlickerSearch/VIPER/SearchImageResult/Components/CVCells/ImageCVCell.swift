@@ -33,7 +33,6 @@ class ImageCVCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         accessibilityIdentifier = "ImageCVCell"
     }
 
