@@ -34,6 +34,7 @@ class ImageCVCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        accessibilityIdentifier = "ImageCVCell"
     }
 
     func configure(vm: ImageCVCellVM) {
