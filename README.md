@@ -1,5 +1,8 @@
 FlickrSearch
-====================
+-------------------
+![flickrSearch](flickrSearch.gif)
+
+## Info
 * #### API: https://flickr.com
 * #### Architecture: VIPER
 * #### Programing Languages: Swift
@@ -18,11 +21,6 @@ FlickrSearch
 1. Install the latest [Xcode developer tools](https://developer.apple.com/xcode/downloads/) from Apple. (preferably the latest Xcode 13.0 <= ).
 1. Open `FlickerSearch.xcodeproj` in Xcode.
 1. Build and run the `Debug` scheme in Xcode.
-
-
--------------------
-## Gif
-![flickrSearch](flickrSearch.gif)
 
 -------------------
 ## ScreenShots
