@@ -28,4 +28,8 @@ class SearchImageResultRouter: SearchImageResultPresenterToRouterProtocol {
         router.viewController = view
         return view
     }
+    
+    func alert(title: String?, msg: String?) {
+        viewController?.showAlert(title: title, msg: msg)
+    }
 }

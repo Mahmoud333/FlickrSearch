@@ -6,42 +6,31 @@
 //
 
 
-import Foundation
+import UIKit
 
-//Presenter <-> View
-protocol SearchImagePresenterToViewProtocol: class {
+//MARK: Presenter <-> View
+protocol SearchImagePresenterToViewProtocol: AnyObject {
     var presenter: SearchImageViewToPresenterProtocol! { get set }
-    
-    //func showLoadingIndicator()
-    //func hideLoadingIndicator()
-    //func reloadData()
 }
 
-protocol SearchImageViewToPresenterProtocol: class {
+protocol SearchImageViewToPresenterProtocol: AnyObject {
     var view: SearchImagePresenterToViewProtocol? { get set }
-    //var numberOfRows: Int { get }
     var recentSearches: [String] { get }
-
+    var numberOfRows: Int { get }
+    var numberOfSections: Int { get }
     
     func viewDidLoad()
-    //func configure(cell: SearchImageCellView, indexPath: IndexPath)
-    //func searchBy(text: String)
-    //func didSelect(indexPath: IndexPath)
+    func configure(cell: UITableViewCell)
 }
 
-//Presenter -> Router
-protocol SearchImagePresenterToRouterProtocol {
-    //func pushSearchImageDetailsViewController(SearchImage: SearchImage)
-}
+//MARK: Presenter -> Router
+protocol SearchImagePresenterToRouterProtocol { }
 
-//Presenter <-> Interactor
+//MARK: Presenter <-> Interactor
 protocol SearchImagePresenterToInteractorProtocol {
     var presenter: SearchImageInteractorToPresenterProtocol? { get set }
-    
-    //func getSearchImage()
 }
 
-protocol SearchImageInteractorToPresenterProtocol: class {
-    //func SearchImageFetchedSuccessfully(SearchImage: SearchImage)
-    //func SearchImageFetchingFailed(withError error: Error)
+protocol SearchImageInteractorToPresenterProtocol: AnyObject {
+    
 }
