@@ -19,12 +19,16 @@ class SearchImageRouter: SearchImagePresenterToRouterProtocol {
     
     static func createModule() -> UIViewController {
         let view = UIStoryboard(name: "SearchImageViewController", bundle: Bundle.main).instantiateInitialViewController() as! SearchImageViewController
+        view.resultVC = SearchImageResultRouter.createModule()
+
         let interactor = SearchImageInteractor()
         let router = SearchImageRouter()
         let presenter = SearchImagePresenter(view: view, interactor: interactor, router: router)
+        
         view.presenter = presenter
         interactor.presenter = presenter
         router.viewController = view
+        
         return view
     }
 }
