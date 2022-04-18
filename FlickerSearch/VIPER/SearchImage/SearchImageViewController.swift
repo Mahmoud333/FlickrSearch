@@ -72,7 +72,7 @@ extension SearchImageViewController: UITableViewDelegate, UITableViewDataSource 
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         }
-        presenter.configure(cell: cell!)
+        presenter.configure(cell: cell!, indexPath: indexPath)
         return cell!
     }
     

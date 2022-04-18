@@ -41,8 +41,8 @@ extension SearchImagePresenter: SearchImageViewToPresenterProtocol {
         print("SearchImagePresenter presenter viewDidLoad")
     }
     
-    func configure(cell: UITableViewCell) {
-        cell?.textLabel?.text = presenter.recentSearches[indexPath.row]
+    func configure(cell: UITableViewCell, indexPath: IndexPath) {
+        cell.textLabel?.text = self.recentSearches[indexPath.row]
     }
 }
 

@@ -20,7 +20,7 @@ protocol SearchImageViewToPresenterProtocol: AnyObject {
     var numberOfSections: Int { get }
     
     func viewDidLoad()
-    func configure(cell: UITableViewCell)
+    func configure(cell: UITableViewCell, indexPath: IndexPath)
 }
 
 //MARK: Presenter -> Router
