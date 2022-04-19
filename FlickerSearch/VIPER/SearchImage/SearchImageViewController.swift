@@ -77,11 +77,11 @@ extension SearchImageViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.numberOfSections
+        presenter.numberOfRows
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        presenter.numberOfRows
+        presenter.numberOfSections
     }
 }
 
